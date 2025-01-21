@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz sui Nucleotidi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .answers button {
+            display: block;
+            margin: 5px 0;
+            padding: 10px;
+            background: #e0e0e0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .answers button:hover {
+            background: #dcdcdc;
+        }
+        .correct {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .wrong {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        .explanation {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f7f7f7;
+            border: 1px dashed #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz sui Nucleotidi</h1>
+    <div id="quiz-container"></div>
+
+    <script>
+        const questions = [
+            {
+                question: "Quale componente NON è presente in un nucleotide?",
+                answers: ["Base azotata", "Zucchero pentoso", "Gruppo fosfato", "Gruppo carbossilico", "Legame β-N-glicosidico"],
+                correct: 3
+            },
+            {
+                question: "Qual è la differenza principale tra nucleosidi e nucleotidi?",
+                answers: ["I nucleosidi non contengono il gruppo fosfato", "I nucleotidi non contengono la base azotata", "I nucleosidi hanno due gruppi fosfato", "I nucleotidi sono privi di zucchero pentoso", "I nucleosidi sono meno stabili"],
+                correct: 0
+            },
+            {
+                question: "Qual è il legame che unisce la base azotata allo zucchero pentoso?",
+                answers: ["Legame fosfoanidridico", "Legame β-N-glicosidico", "Legame fosfodiesterico", "Legame peptidico", "Legame ionico"],
+                correct: 1
+            },
+            {
+                question: "Nel DNA, lo zucchero pentoso è:",
+                answers: ["Ribosio", "Deossiribosio", "Glucosio", "Fruttosio", "Galattosio"],
+                correct: 1
+            },
+            {
+                question: "In un nucleotide trifosfato come l'ATP, i legami fosfoanidridici sono tra:",
+                answers: ["Il fosfato e lo zucchero", "Due gruppi fosfato", "La base azotata e lo zucchero", "Due zuccheri", "Lo zucchero e la base azotata"],
+                correct: 1
+            },
+            {
+                question: "Qual è una funzione principale dell'ATP?",
+                answers: ["Catalizzare la sintesi proteica", "Fonte di energia per processi cellulari", "Costituire le membrane cellulari", "Trasportare ossigeno nel sangue", "Neutralizzare i radicali liberi"],
+                correct: 1
+            },
+            {
+                question: "Quale nucleotide è coinvolto nella trasmissione del segnale cellulare?",
+                answers: ["cAMP", "NADH", "FAD", "ATP", "GTP"],
+                correct: 0
+            },
+            {
+                question: "Qual è una funzione del cofattore NAD+?",
+                answers: ["Trasporto di amminoacidi", "Trasferimento di elettroni nelle reazioni di ossidoriduzione", "Sintesi di fosfolipidi", "Legame delle proteine alla membrana", "Stabilizzazione del DNA"],
+                correct: 1
+            },
+            {
+                question: "UDP (uridina difosfato) è principalmente coinvolto:",
+                answers: ["Nel metabolismo del glicogeno", "Nel trasporto di elettroni", "Nella sintesi proteica", "Nella regolazione del pH intracellulare", "Nel riconoscimento cellulare"],
+                correct: 0
+            },
+            {
+                question: "CDP (citosina difosfato) è essenziale nella sintesi di:",
+                answers: ["Fosfolipidi", "Proteine", "Carboidrati", "Acidi nucleici", "Vitamine"],
+                correct: 0
+            },
+            {
+                question: "Qual è il legame che unisce i nucleotidi nel DNA?",
+                answers: ["Legame β-N-glicosidico", "Legame fosfodiesterico", "Legame fosfoanidridico", "Legame peptidico", "Legame idrogeno"],
+                correct: 1
+            },
+            {
+                question: "Le catene di DNA e RNA hanno una direzione specifica, indicata da:",
+                answers: ["L’orientamento delle basi azotate", "Il numero di gruppi fosfato", "L’orientamento 5’ → 3’ dello zucchero pentoso", "La posizione dei gruppi fosforici", "La conformazione dello zucchero"],
+                correct: 2
+            },
+            {
+                question: "Quale proprietà delle basi azotate consente loro di appaiarsi?",
+                answers: ["Assorbimento della luce UV", "Capacità di formare legami idrogeno", "Presenza di un gruppo fosfato", "Aromaticità dell'anello", "Planarità della struttura"],
+                correct: 1
+            },
+            {
+                question: "Quale delle seguenti basi azotate è una purina?",
+                answers: ["Timina", "Citosina", "Adenina", "Uracile", "Glucosio"],
+                correct: 2
+            },
+            {
+                question: "La denaturazione del DNA si riferisce a:",
+                answers: ["La rottura dei legami fosfodiesterici", "La separazione dei due filamenti del DNA", "La perdita delle basi azotate", "La degradazione dei nucleotidi", "La rimozione del gruppo fosfato"],
+                correct: 1
+            },
+            {
+                question: "Quale RNA trasporta gli amminoacidi nella sintesi proteica?",
+                answers: ["mRNA", "tRNA", "rRNA", "snRNA", "microRNA"],
+                correct: 1
+            },
+            {
+                question: "Qual è il ruolo principale del rRNA?",
+                answers: ["Trasportare amminoacidi", "Agire come componente strutturale dei ribosomi", "Codificare informazioni genetiche", "Regolare l’espressione genica", "Trasportare energia"],
+                correct: 1
+            },
+            {
+                question: "Quale base azotata è presente solo nell’RNA?",
+                answers: ["Adenina", "Guanina", "Citosina", "Uracile", "Timina"],
+                correct: 3
+            },
+            {
+                question: "Quale molecola è un esempio di nucleotide trifosfato utilizzato nella sintesi proteica?",
+                answers: ["ATP", "GTP", "UTP", "CTP", "NADH"],
+                correct: 1
+            },
+            {
+                question: "I microRNA (miRNA) sono coinvolti in:",
+                answers: ["La regolazione dell’espressione genica", "La traduzione dell’mRNA", "La formazione del ribosoma", "La replicazione del DNA", "La sintesi di proteine"],
+                correct: 0
+            }
+        ];
+
+        const quizContainer = document.getElementById("quiz-container");
+
+        questions.forEach((q, index) => {
+            const questionDiv = document.createElement("div");
+            questionDiv.className = "question";
+
+            const questionTitle = document.createElement("h3");
+            questionTitle.textContent = `${index + 1}. ${q.question}`;
+            questionDiv.appendChild(questionTitle);
+
+            const answersDiv = document.createElement("div");
+            answersDiv.className = "answers";
+
+            q.answers.forEach((answer, i) => {
+                const button = document.createElement("button");
+                button.textContent = answer;
+                button.onclick = () => checkAnswer(i, q.correct, button, questionDiv);
+                answersDiv.appendChild(button);
+            });
+
+            questionDiv.appendChild(answersDiv);
+            quizContainer.appendChild(questionDiv);
+        });
+
+        function checkAnswer(selected, correct, button, questionDiv) {
+            if (selected === correct) {
+                button.classList.add("correct");
+                showExplanation(questionDiv, "Risposta corretta!");
+            } else {
+                button.classList.add("wrong");
+                const correctButton = questionDiv.querySelectorAll("button")[correct];
+                correctButton.classList.add("correct");
+                showExplanation(questionDiv, `Risposta sbagliata! La risposta corretta è: "${correctButton.textContent}".`);
+            }
+        }
+
+        function showExplanation(questionDiv, text) {
+            const explanationDiv = document.createElement("div");
+            explanationDiv.className = "explanation";
+            explanationDiv.textContent = text;
+            questionDiv.appendChild(explanationDiv);
+        }
+    </script>
+</body>
+</html>
